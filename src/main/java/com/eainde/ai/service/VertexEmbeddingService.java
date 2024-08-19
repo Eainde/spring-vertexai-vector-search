@@ -6,6 +6,7 @@ import org.springframework.ai.vertexai.embedding.text.VertexAiTextEmbeddingModel
 import org.springframework.ai.vertexai.embedding.text.VertexAiTextEmbeddingOptions;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,5 +28,19 @@ public class VertexEmbeddingService {
         var embeddingModel = new VertexAiTextEmbeddingModel(connectionDetails, options);
 
         return embeddingModel.embedForResponse(List.of(request));
+    }
+
+    public List<Double> getVectors(final String request) {
+        EmbeddingResponse response =getResponse(request);
+        float[] vectors = response.getResult().getOutput();
+        return convertFloatArrayToList(vectors);
+    }
+
+    public static List<Double> convertFloatArrayToList(float[] floatArray) {
+        List<Double> doubleList = new ArrayList<>(floatArray.length);
+        for (float f : floatArray) {
+            doubleList.add((double) f);
+        }
+        return doubleList;
     }
 }
