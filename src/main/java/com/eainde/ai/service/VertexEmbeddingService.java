@@ -15,11 +15,10 @@ public class VertexEmbeddingService {
     private static final String REGION = "europe-west2";
 
     public EmbeddingResponse getResponse(final String request) {
-        VertexAiEmbeddigConnectionDetails connectionDetails =
-                VertexAiEmbeddigConnectionDetails.builder()
-                        .withProjectId(PROJECT_ID)
-                        .withLocation(REGION)
-                        .build();
+        VertexAiEmbeddigConnectionDetails connectionDetails = VertexAiEmbeddigConnectionDetails.builder()
+                .withProjectId(PROJECT_ID)
+                .withLocation(REGION)
+                .build();
 
         VertexAiTextEmbeddingOptions options = VertexAiTextEmbeddingOptions.builder()
                 .withModel(VertexAiTextEmbeddingOptions.DEFAULT_MODEL_NAME)
@@ -31,7 +30,7 @@ public class VertexEmbeddingService {
     }
 
     public List<Double> getVectors(final String request) {
-        EmbeddingResponse response =getResponse(request);
+        EmbeddingResponse response = getResponse(request);
         float[] vectors = response.getResult().getOutput();
         return convertFloatArrayToList(vectors);
     }

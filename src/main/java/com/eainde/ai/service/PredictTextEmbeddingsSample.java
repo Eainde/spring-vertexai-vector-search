@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
  * We can ignore this as it involves lot of manual configuration
  */
 @Service
+@Deprecated
 public class PredictTextEmbeddingsSample {
     private static final String ENDPOINT = "europe-west2-aiplatform.googleapis.com:443";
     private static final String PROJECT = "cloud-run-project-431416";
