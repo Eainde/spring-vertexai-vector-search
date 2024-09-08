@@ -1,28 +1,22 @@
 package com.eainde.ai.controller;
 
+import com.eainde.ai.domain.Chat;
 import com.eainde.ai.service.ChromaService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ai.document.Document;
-import org.springframework.ai.embedding.EmbeddingResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 public class ChromaController {
     private final ChromaService chromaService;
 
-    @GetMapping("/chroma/embedding")
-    public List<Document> embed() {
-        return chromaService.retrieve();
+    @GetMapping("/ai/embedding/{collectionName}/{message}")
+    public String embed(@PathVariable("collectionName") String collectionName, @PathVariable("message") String message) {
+        return chromaService.chat(message,collectionName);
     }
 
     @PostMapping("/chroma/save")
-    public void addEmbeddings()  {
-        chromaService.save();
+    public String addEmbeddings(@RequestBody Chat chat)  {
+        return chromaService.save(chat);
     }
 }
