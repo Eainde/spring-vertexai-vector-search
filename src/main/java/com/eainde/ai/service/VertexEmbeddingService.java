@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class VertexEmbeddingService {
-    private static final String PROJECT_ID = "cloud-run-project-431416";
+    private static final String PROJECT_ID = "eainde";
     private static final String REGION = "europe-west2";
 
     public EmbeddingResponse getResponse(final String request) {
